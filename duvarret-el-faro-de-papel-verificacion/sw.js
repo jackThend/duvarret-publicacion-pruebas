@@ -1,9 +1,9 @@
-// Duvarret — caché sin conexión de la obra (el-faro-de-papel-1.0.0-28792c8c)
+// Duvarret — caché sin conexión de la obra (el-faro-de-papel-1.0.0-a60f454e)
 const PREFIX = 'duvarret:' + encodeURIComponent(self.registration.scope) + ':';
-const CACHE = PREFIX + 'el-faro-de-papel-1.0.0-28792c8c';
+const CACHE = PREFIX + 'el-faro-de-papel-1.0.0-a60f454e';
 // El reproductor y el manifiesto son imprescindibles. Los sonidos e imágenes se precargan uno a uno:
 // si alguno falla (red, tamaño, espacio), el resto de la obra sigue disponible sin conexión.
-const CORE = ["./","./index.html","./icons/duvarret-256.png","./assets/player-DfPZbdSc.css","./icons/duvarret-512.png","./assets/resonance-audio-uYksMKFF.js","./assets/player-pWKBF_sq.js","./manifest/story_manifest.json","./manifest.webmanifest"];
+const CORE = ["./","./assets/player-DfPZbdSc.css","./assets/player-pWKBF_sq.js","./assets/resonance-audio-uYksMKFF.js","./icons/duvarret-256.png","./icons/duvarret-512.png","./index.html","./manifest/story_manifest.json","./manifest.webmanifest"];
 const MEDIA = [];
 self.addEventListener('install', (e) => e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE).then(() => Promise.allSettled(MEDIA.map((f) => c.add(f))))).then(() => self.skipWaiting())));
 self.addEventListener('activate', (e) => e.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k.startsWith(PREFIX) && k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())));
